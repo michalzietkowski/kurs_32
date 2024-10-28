@@ -1,4 +1,4 @@
-'''
+"""
 Stwórz system zarządzania księgozbiorem bibliotecznym, który pozwoli na monitorowanie przepływu książek oraz śledzenie budżetu biblioteki.
 Po uruchomieniu systemu użytkownik otrzymuje listę komend do wyboru:
 - doładowanie
@@ -23,11 +23,14 @@ Funkcje po wywołaniu danych komend są następujące:
 - Operacje doładowanie, wypożycz oraz zakup są zapisywane dla późniejszej referencji przy użyciu komendy dziennik.
 - Po każdej komendzie system wyświetla ponownie listę dostępnych opcji i prosi o wybór kolejnej.
 - Ochrona przed błędami użytkownika, takimi jak wpisywanie błędnych danych czy żądanie zakupu na wartości ujemne. Powinno być również sprawdzanie poprawności typów danych wprowadzanych przez użytkownika.
-'''
-from IPython.core.release import author
+"""
 
 saldo_ksiegarni = 10000.0
-historia = ["dodano 1000 zł do konta", "odjęto 1000 zł od konta", "wypożyczono książkę Wiedźmin"]
+historia = [
+    "dodano 1000 zł do konta",
+    "odjęto 1000 zł od konta",
+    "wypożyczono książkę Wiedźmin",
+]
 ksiegozbior = [
     {
         "tytul": "Wiedzmin",
@@ -35,7 +38,7 @@ ksiegozbior = [
         "rok_wydania": 1999,
         "ilosc_dostepnych_ksiazek": 5,
         "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 10.0
+        "cena_wypozyczenia": 10.0,
     },
     {
         "tytul": "Clean code",
@@ -43,7 +46,7 @@ ksiegozbior = [
         "rok_wydania": 1990,
         "ilosc_dostepnych_ksiazek": 5,
         "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 15.0
+        "cena_wypozyczenia": 15.0,
     },
     {
         "tytul": "Clean Architecture",
@@ -51,21 +54,23 @@ ksiegozbior = [
         "rok_wydania": 1990,
         "ilosc_dostepnych_ksiazek": 5,
         "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 15.0
-    }
+        "cena_wypozyczenia": 15.0,
+    },
 ]
 
 while True:
     print("Witaj w naszym programie do zarządzania księgarnią.")
-    wybor_uzytkownika = input("Podaj co chcesz zrobić:\n"
-                              "1. Zmiana salda\n"
-                              "2. Wypożyczenie książki\n"
-                              "3. Zakup książki\n"
-                              "4. Sprawdzenie salda\n"
-                              "5. Zestawienie księgarni\n"
-                              "6. Szczegóły książki\n"
-                              "7. Historia działań\n"
-                              "8. Zakończenie programu\n")
+    wybor_uzytkownika = input(
+        "Podaj co chcesz zrobić:\n"
+        "1. Zmiana salda\n"
+        "2. Wypożyczenie książki\n"
+        "3. Zakup książki\n"
+        "4. Sprawdzenie salda\n"
+        "5. Zestawienie księgarni\n"
+        "6. Szczegóły książki\n"
+        "7. Historia działań\n"
+        "8. Zakończenie programu\n"
+    )
 
     if wybor_uzytkownika in ("1", "Zmiana salda"):
         kwota = float(input("Podaj kwotę, o jaką chcesz zmienić saldo: "))
@@ -82,20 +87,25 @@ while True:
         rok_wydania = int(input("Podaj rok wydania książki, którą chcesz wypożyczyć: "))
         znaleziono_ksiazke = False
         for ksiazka in ksiegozbior:
-            if ksiazka.get("autor") == autor and ksiazka.get("tytul") == tytul and ksiazka.get("rok_wydania") == rok_wydania:
+            if (
+                ksiazka.get("autor") == autor
+                and ksiazka.get("tytul") == tytul
+                and ksiazka.get("rok_wydania") == rok_wydania
+            ):
                 if ksiazka.get("ilosc_dostepnych_ksiazek") >= 1:
                     ksiazka["ilosc_dostepnych_ksiazek"] -= 1
                     saldo_ksiegarni += ksiazka.get("cena_wypozyczenia")
                     print(f"wypozyczyles ksiazke {tytul}")
                 else:
-                    print("Niestety, w tym momencie ta książka jest całkowicie wypożyczona! Wróć w innym terminie.")
+                    print(
+                        "Niestety, w tym momencie ta książka jest całkowicie wypożyczona! Wróć w innym terminie."
+                    )
                     # dodanie do historii
                 znaleziono_ksiazke = True
                 break
         if not znaleziono_ksiazke:
             print("Nie znaleziono książki\n")
-            #dodanie info do historii
-
+            # dodanie info do historii
 
     elif wybor_uzytkownika == "3":
         autor = input("Podaj autora książki, którą chcesz zakupić: ")
@@ -109,16 +119,18 @@ while True:
             print("Nie stać nas na te książki")
             # dodajemy do historii
             continue
-        ksiegozbior.append({
-            "tytul": tytul,
-            "autor": autor,
-            "rok_wydania": rok_wydania,
-            "ilosc_dostepnych_ksiazek": ilosc_ksiazek,
-            "ilosc_ksiazek": ilosc_ksiazek,
-            "cena_wypozyczenia": cena_wypozyczenia
-        })
+        ksiegozbior.append(
+            {
+                "tytul": tytul,
+                "autor": autor,
+                "rok_wydania": rok_wydania,
+                "ilosc_dostepnych_ksiazek": ilosc_ksiazek,
+                "ilosc_ksiazek": ilosc_ksiazek,
+                "cena_wypozyczenia": cena_wypozyczenia,
+            }
+        )
         saldo_ksiegarni -= ilosc_ksiazek * cena_jednostkowa_ksiazki
-        #dodajemy do historii
+        # dodajemy do historii
 
     elif wybor_uzytkownika == "4":
         print(saldo_ksiegarni)

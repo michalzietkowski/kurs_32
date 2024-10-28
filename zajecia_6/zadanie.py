@@ -10,9 +10,9 @@
 # • Każda szafka może maksymalnie pomieścić 100 stron.
 # • W przypadku, jeżeli dodawany dokument przekroczy miejsce w szafce, ma zostać umieszczony w nowej szafce, a obecna zostaje zamknięta.
 # • W przypadku podania liczby stron mniejszej od 1 lub większej od 30, dodawanie dokumentów zostaje zakończone i wszystkie szafki są zamknięte. Wyświetlane jest podsumowanie.
-#1. Liczba dokumentow
-#2. Podac ilosc stron kazdego dokumentu
-#pojemnosc szafki = 100
+# 1. Liczba dokumentow
+# 2. Podac ilosc stron kazdego dokumentu
+# pojemnosc szafki = 100
 
 liczba_dokumentow = int(input("Podaj ilość dokumentów do dodania: "))
 
@@ -23,7 +23,7 @@ maksymalna_niewykorzystana_pojemnosc = 0
 numer_szafki_z_maksymalna_niewykorzystana_pojemnoscia = 1
 
 for dokument in range(liczba_dokumentow):
-    #liczba_stron = 0
+    # liczba_stron = 0
     liczba_stron_dokumentu = int(input("Podaj ilość stron dokuemntu: "))
     if liczba_stron_dokumentu > 30 or liczba_stron_dokumentu < 1:
         liczba_dokumentow = dokument
@@ -48,7 +48,9 @@ if 100 - pojemnosc_biezacej_szafki > maksymalna_niewykorzystana_pojemnosc:
 print(f"Liczba dokumentów, które dodałeś to {liczba_dokumentow}")
 print(f"Łączna liczba stron dokumentów, które dodałeś to {liczba_stron}")
 print(f"Suma niewykorzystanego miejsca w szafkach to: {liczba_szafek*100-liczba_stron}")
-print(f"Najwiecej niewykorzystanego miejsca jest w szafce {numer_szafki_z_maksymalna_niewykorzystana_pojemnoscia}"
-      f" i wynosi {maksymalna_niewykorzystana_pojemnosc}")
+print(
+    f"Najwiecej niewykorzystanego miejsca jest w szafce {numer_szafki_z_maksymalna_niewykorzystana_pojemnoscia}"
+    f" i wynosi {maksymalna_niewykorzystana_pojemnosc}"
+)
 # print(liczba_stron)
 # print(pojemnosc_biezacej_szafki)
