@@ -34,9 +34,7 @@ wiek = 24
 
 print(hash(("mezczyzna",)))
 
-slownik_30 = {
-    ("mezczyzna",): "123"
-}
+slownik_30 = {("mezczyzna",): "123"}
 print(slownik_30)
 
 lista = ["123", True, 23434]
@@ -44,7 +42,5 @@ lista = ["123", True, 23434]
 slownik = {
     "klucz1": [],
     "klucz2": {},
-    "klucz3": {
-        "123": []
-    },
+    "klucz3": {"123": []},
 }

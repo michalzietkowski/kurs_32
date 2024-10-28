@@ -5,7 +5,7 @@ b = "Adam"
 c = "Jacek"
 d = "Tomek"
 
-#CRUD
+# CRUD
 
 uczniowie = ["Michał", "Adam", "Jacek", "Tomek"]
 randomowa_lista = ["michal", True, 1.0, 123, []]
@@ -40,8 +40,8 @@ uczniowie.insert(0, "Ania")
 uczniowie.insert(100, "Ania")
 print(uczniowie)
 
-del(uczniowie[0]) # działamy na indexach
-uczniowie.remove("Michał") # działamy na wartościach
+del uczniowie[0]  # działamy na indexach
+uczniowie.remove("Michał")  # działamy na wartościach
 print(uczniowie)
 
 # in_1 in_2 output
@@ -93,12 +93,13 @@ print(uczniowie)
 
 ############ SŁOWNIKI
 
-uczen = {"imie": "Michał",
-         "nazwisko": "Ziętkowski",
-         "klasa": "6A",
-         "wiek": 13,
-         "wzrost": "90"
-         }
+uczen = {
+    "imie": "Michał",
+    "nazwisko": "Ziętkowski",
+    "klasa": "6A",
+    "wiek": 13,
+    "wzrost": "90",
+}
 
 print(uczen)
 print(uczen["imie"])
