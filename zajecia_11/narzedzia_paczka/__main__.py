@@ -1,0 +1,1 @@
+print("A tutaj wywolam sobie paczke pythonowa")
