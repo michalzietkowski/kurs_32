@@ -1,62 +1,13 @@
-"""
-Stwórz system zarządzania księgozbiorem bibliotecznym, który pozwoli na monitorowanie przepływu książek oraz śledzenie budżetu biblioteki.
-Po uruchomieniu systemu użytkownik otrzymuje listę komend do wyboru:
-- doładowanie
-- wypożycz
-- zakup
-- bieżący_stan
-- zestawienie
-- szczegóły_książki
-- dziennik
-- zakończ
-Funkcje po wywołaniu danych komend są następujące:
-1. doładowanie - Umożliwia dodanie środków do budżetu biblioteki lub ich odjęcie.
-2. wypożycz - Rejestruje wypożyczenie książki przez czytelnika. System żąda podania imienia, nazwiska oraz daty ksiązki. Koszt wypożyczenia jest dodawany do budżetu.
-3. zakup - Rejestruje zakup nowych książek dla biblioteki. System pyta o tytuł książki, koszt zakupu i liczbę egzemplarzy. Zakupione książki są dodawane do zbioru, a środki są odprowadzane z budżetu, który nie może być negatywny po transakcji.
-4. bieżący_stan - Wyświetla aktualny stan środków finansowych.
-5. zestawienie - Podsumowuje cały księgozbiór biblioteki wraz z cenami zakupu i ich ilością.
-6. szczegóły_książki - Wyświetla dostępność i dane dotyczące pojedynczej książki po wpisaniu numeru ISBN.
-7. dziennik - Przegląd historii transakcji. Podając wartości "od" i "do", system wyświetla zapisane działania w podanym zakresie. W przypadku pustych pól lub wartości spoza zakresu, użytkownik jest informowany o błędzie i wyświetlana jest liczba wszystkich zarejestrowanych transakcji.
-8. zakończ - Kończy działanie programu.
-**Inne wymagania:**
-- System działa do momentu wybrania komendy zakończ.
-- Operacje doładowanie, wypożycz oraz zakup są zapisywane dla późniejszej referencji przy użyciu komendy dziennik.
-- Po każdej komendzie system wyświetla ponownie listę dostępnych opcji i prosi o wybór kolejnej.
-- Ochrona przed błędami użytkownika, takimi jak wpisywanie błędnych danych czy żądanie zakupu na wartości ujemne. Powinno być również sprawdzanie poprawności typów danych wprowadzanych przez użytkownika.
-"""
+from file_handler import FileHandler
 
-saldo_ksiegarni = 10000.0
-historia = [
-    "dodano 1000 zł do konta",
-    "odjęto 1000 zł od konta",
-    "wypożyczono książkę Wiedźmin",
-]
-ksiegozbior = [
-    {
-        "tytul": "Wiedzmin",
-        "autor": "Andrzej Sapkowski",
-        "rok_wydania": 1999,
-        "ilosc_dostepnych_ksiazek": 5,
-        "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 10.0,
-    },
-    {
-        "tytul": "Clean code",
-        "autor": "Uncle Bob",
-        "rok_wydania": 1990,
-        "ilosc_dostepnych_ksiazek": 5,
-        "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 15.0,
-    },
-    {
-        "tytul": "Clean Architecture",
-        "autor": "Uncle Bob",
-        "rok_wydania": 1990,
-        "ilosc_dostepnych_ksiazek": 5,
-        "ilosc_ksiazek": 5,
-        "cena_wypozyczenia": 15.0,
-    },
-]
+
+file_handler = FileHandler(data_file="dane_ksiegarni.json", history_file="historia.json")
+data = file_handler.load_data_from_data_file()
+historia = file_handler.load_data_from_history_file()
+
+saldo_ksiegarni = data.get("saldo")
+
+ksiegozbior = data.get("ksiegozbior")
 
 while True:
     print("Witaj w naszym programie do zarządzania księgarnią.")
@@ -149,3 +100,6 @@ while True:
 
     else:
         print("Nie można dodać takiej komendy")
+
+file_handler.save_data_to_data_file(balance=saldo_ksiegarni, book_collection=ksiegozbior)
+file_handler.save_data_history_file(history=historia)
