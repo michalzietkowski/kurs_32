@@ -1,0 +1,1454 @@
+From 778d7cdb632af5b791bb94de1501f66a0d5601e1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20Zi=C4=99tkowski?=
+ <michal.zietkowski@stxnext.pl>
+Date: Mon, 25 Nov 2024 17:26:35 +0100
+Subject: [PATCH 1/2] next
+
+---
+ .idea/kurs32.iml                              |   5 +-
+ .idea/misc.xml                                |   2 +-
+ dummy.py                                      |   8 -
+ requirements.txt                              |   7 +
+ .../kurs_32_zajecia_15/bin/Activate.ps1       | 247 ++++++++++++++++++
+ zajecia_15/kurs_32_zajecia_15/bin/activate    |  69 +++++
+ .../kurs_32_zajecia_15/bin/activate.csh       |  26 ++
+ .../kurs_32_zajecia_15/bin/activate.fish      |  66 +++++
+ zajecia_15/kurs_32_zajecia_15/bin/normalizer  |   8 +
+ zajecia_15/kurs_32_zajecia_15/bin/pip         |   8 +
+ zajecia_15/kurs_32_zajecia_15/bin/pip3        |   8 +
+ zajecia_15/kurs_32_zajecia_15/bin/pip3.10     |   8 +
+ zajecia_15/kurs_32_zajecia_15/bin/python      |   1 +
+ zajecia_15/kurs_32_zajecia_15/bin/python3     |   1 +
+ zajecia_15/kurs_32_zajecia_15/bin/python3.10  |   1 +
+ zajecia_15/kurs_32_zajecia_15/lib64           |   1 +
+ zajecia_15/kurs_32_zajecia_15/pyvenv.cfg      |   3 +
+ zajecia_15/requests_test.py                   |   4 +
+ zajecia_15/requirements.txt                   |   8 +
+ zajecia_15/skrotowe_operacje.py               |  74 ++++++
+ zajecia_16/countres_data.json                 |   1 +
+ .../countries_selector/bin/Activate.ps1       | 247 ++++++++++++++++++
+ zajecia_16/countries_selector/bin/activate    |  69 +++++
+ .../countries_selector/bin/activate.csh       |  26 ++
+ .../countries_selector/bin/activate.fish      |  66 +++++
+ zajecia_16/countries_selector/bin/normalizer  |   8 +
+ zajecia_16/countries_selector/bin/pip         |   8 +
+ zajecia_16/countries_selector/bin/pip3        |   8 +
+ zajecia_16/countries_selector/bin/pip3.10     |   8 +
+ zajecia_16/countries_selector/bin/python      |   1 +
+ zajecia_16/countries_selector/bin/python3     |   1 +
+ zajecia_16/countries_selector/bin/python3.10  |   1 +
+ zajecia_16/countries_selector/lib64           |   1 +
+ zajecia_16/countries_selector/pyvenv.cfg      |   3 +
+ zajecia_16/file_handler.py                    |  26 ++
+ zajecia_16/runner.py                          |  45 ++++
+ zajecia_16/utils.py                           |  22 ++
+ zajecia_16/weather_data.json                  |   6 +
+ zajecia_16/weather_example.py                 |   7 +
+ 39 files changed, 1099 insertions(+), 10 deletions(-)
+ create mode 100644 requirements.txt
+ create mode 100644 zajecia_15/kurs_32_zajecia_15/bin/Activate.ps1
+ create mode 100644 zajecia_15/kurs_32_zajecia_15/bin/activate
+ create mode 100644 zajecia_15/kurs_32_zajecia_15/bin/activate.csh
+ create mode 100644 zajecia_15/kurs_32_zajecia_15/bin/activate.fish
+ create mode 100755 zajecia_15/kurs_32_zajecia_15/bin/normalizer
+ create mode 100755 zajecia_15/kurs_32_zajecia_15/bin/pip
+ create mode 100755 zajecia_15/kurs_32_zajecia_15/bin/pip3
+ create mode 100755 zajecia_15/kurs_32_zajecia_15/bin/pip3.10
+ create mode 120000 zajecia_15/kurs_32_zajecia_15/bin/python
+ create mode 120000 zajecia_15/kurs_32_zajecia_15/bin/python3
+ create mode 120000 zajecia_15/kurs_32_zajecia_15/bin/python3.10
+ create mode 120000 zajecia_15/kurs_32_zajecia_15/lib64
+ create mode 100644 zajecia_15/kurs_32_zajecia_15/pyvenv.cfg
+ create mode 100644 zajecia_15/requests_test.py
+ create mode 100644 zajecia_15/requirements.txt
+ create mode 100644 zajecia_15/skrotowe_operacje.py
+ create mode 100644 zajecia_16/countres_data.json
+ create mode 100644 zajecia_16/countries_selector/bin/Activate.ps1
+ create mode 100644 zajecia_16/countries_selector/bin/activate
+ create mode 100644 zajecia_16/countries_selector/bin/activate.csh
+ create mode 100644 zajecia_16/countries_selector/bin/activate.fish
+ create mode 100755 zajecia_16/countries_selector/bin/normalizer
+ create mode 100755 zajecia_16/countries_selector/bin/pip
+ create mode 100755 zajecia_16/countries_selector/bin/pip3
+ create mode 100755 zajecia_16/countries_selector/bin/pip3.10
+ create mode 120000 zajecia_16/countries_selector/bin/python
+ create mode 120000 zajecia_16/countries_selector/bin/python3
+ create mode 120000 zajecia_16/countries_selector/bin/python3.10
+ create mode 120000 zajecia_16/countries_selector/lib64
+ create mode 100644 zajecia_16/countries_selector/pyvenv.cfg
+ create mode 100644 zajecia_16/file_handler.py
+ create mode 100644 zajecia_16/runner.py
+ create mode 100644 zajecia_16/utils.py
+ create mode 100644 zajecia_16/weather_data.json
+ create mode 100644 zajecia_16/weather_example.py
+
+diff --git a/.idea/kurs32.iml b/.idea/kurs32.iml
+index 871cd8c..565592b 100644
+--- a/.idea/kurs32.iml
++++ b/.idea/kurs32.iml
+@@ -2,7 +2,10 @@
+ <module type="PYTHON_MODULE" version="4">
+   <component name="NewModuleRootManager">
+     <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="jdk" jdkName="Python 3.10 (colisprive)" jdkType="Python SDK" />
++    <orderEntry type="jdk" jdkName="Python 3.10 (kurs32)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
++  <component name="TestRunnerService">
++    <option name="PROJECT_TEST_RUNNER" value="py.test" />
++  </component>
+ </module>
+\ No newline at end of file
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index 4073f38..3b809e1 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.10 (colisprive)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (colisprive)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (kurs32)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+diff --git a/dummy.py b/dummy.py
+index cf43395..e69de29 100644
+--- a/dummy.py
++++ b/dummy.py
+@@ -1,8 +0,0 @@
+-macierz = [["", "", ""],
+-           ["", "x", ""],
+-           ["", "", ""]]
+-
+-macierz[0][2] = "o"
+-
+-for line in macierz:
+-    print(line)
+\ No newline at end of file
+diff --git a/requirements.txt b/requirements.txt
+new file mode 100644
+index 0000000..0c41876
+--- /dev/null
++++ b/requirements.txt
+@@ -0,0 +1,7 @@
++certifi==2024.8.30
++charset-normalizer==3.4.0
++geographiclib==2.0
++geopy==2.4.1
++idna==3.10
++requests==2.32.3
++urllib3==2.2.3
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/Activate.ps1 b/zajecia_15/kurs_32_zajecia_15/bin/Activate.ps1
+new file mode 100644
+index 0000000..b49d77b
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/Activate.ps1
+@@ -0,0 +1,247 @@
++<#
++.Synopsis
++Activate a Python virtual environment for the current PowerShell session.
++
++.Description
++Pushes the python executable for a virtual environment to the front of the
++$Env:PATH environment variable and sets the prompt to signify that you are
++in a Python virtual environment. Makes use of the command line switches as
++well as the `pyvenv.cfg` file values present in the virtual environment.
++
++.Parameter VenvDir
++Path to the directory that contains the virtual environment to activate. The
++default value for this is the parent of the directory that the Activate.ps1
++script is located within.
++
++.Parameter Prompt
++The prompt prefix to display when this virtual environment is activated. By
++default, this prompt is the name of the virtual environment folder (VenvDir)
++surrounded by parentheses and followed by a single space (ie. '(.venv) ').
++
++.Example
++Activate.ps1
++Activates the Python virtual environment that contains the Activate.ps1 script.
++
++.Example
++Activate.ps1 -Verbose
++Activates the Python virtual environment that contains the Activate.ps1 script,
++and shows extra information about the activation as it executes.
++
++.Example
++Activate.ps1 -VenvDir C:\Users\MyUser\Common\.venv
++Activates the Python virtual environment located in the specified location.
++
++.Example
++Activate.ps1 -Prompt "MyPython"
++Activates the Python virtual environment that contains the Activate.ps1 script,
++and prefixes the current prompt with the specified string (surrounded in
++parentheses) while the virtual environment is active.
++
++.Notes
++On Windows, it may be required to enable this Activate.ps1 script by setting the
++execution policy for the user. You can do this by issuing the following PowerShell
++command:
++
++PS C:\> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
++
++For more information on Execution Policies: 
++https://go.microsoft.com/fwlink/?LinkID=135170
++
++#>
++Param(
++    [Parameter(Mandatory = $false)]
++    [String]
++    $VenvDir,
++    [Parameter(Mandatory = $false)]
++    [String]
++    $Prompt
++)
++
++<# Function declarations --------------------------------------------------- #>
++
++<#
++.Synopsis
++Remove all shell session elements added by the Activate script, including the
++addition of the virtual environment's Python executable from the beginning of
++the PATH variable.
++
++.Parameter NonDestructive
++If present, do not remove this function from the global namespace for the
++session.
++
++#>
++function global:deactivate ([switch]$NonDestructive) {
++    # Revert to original values
++
++    # The prior prompt:
++    if (Test-Path -Path Function:_OLD_VIRTUAL_PROMPT) {
++        Copy-Item -Path Function:_OLD_VIRTUAL_PROMPT -Destination Function:prompt
++        Remove-Item -Path Function:_OLD_VIRTUAL_PROMPT
++    }
++
++    # The prior PYTHONHOME:
++    if (Test-Path -Path Env:_OLD_VIRTUAL_PYTHONHOME) {
++        Copy-Item -Path Env:_OLD_VIRTUAL_PYTHONHOME -Destination Env:PYTHONHOME
++        Remove-Item -Path Env:_OLD_VIRTUAL_PYTHONHOME
++    }
++
++    # The prior PATH:
++    if (Test-Path -Path Env:_OLD_VIRTUAL_PATH) {
++        Copy-Item -Path Env:_OLD_VIRTUAL_PATH -Destination Env:PATH
++        Remove-Item -Path Env:_OLD_VIRTUAL_PATH
++    }
++
++    # Just remove the VIRTUAL_ENV altogether:
++    if (Test-Path -Path Env:VIRTUAL_ENV) {
++        Remove-Item -Path env:VIRTUAL_ENV
++    }
++
++    # Just remove VIRTUAL_ENV_PROMPT altogether.
++    if (Test-Path -Path Env:VIRTUAL_ENV_PROMPT) {
++        Remove-Item -Path env:VIRTUAL_ENV_PROMPT
++    }
++
++    # Just remove the _PYTHON_VENV_PROMPT_PREFIX altogether:
++    if (Get-Variable -Name "_PYTHON_VENV_PROMPT_PREFIX" -ErrorAction SilentlyContinue) {
++        Remove-Variable -Name _PYTHON_VENV_PROMPT_PREFIX -Scope Global -Force
++    }
++
++    # Leave deactivate function in the global namespace if requested:
++    if (-not $NonDestructive) {
++        Remove-Item -Path function:deactivate
++    }
++}
++
++<#
++.Description
++Get-PyVenvConfig parses the values from the pyvenv.cfg file located in the
++given folder, and returns them in a map.
++
++For each line in the pyvenv.cfg file, if that line can be parsed into exactly
++two strings separated by `=` (with any amount of whitespace surrounding the =)
++then it is considered a `key = value` line. The left hand string is the key,
++the right hand is the value.
++
++If the value starts with a `'` or a `"` then the first and last character is
++stripped from the value before being captured.
++
++.Parameter ConfigDir
++Path to the directory that contains the `pyvenv.cfg` file.
++#>
++function Get-PyVenvConfig(
++    [String]
++    $ConfigDir
++) {
++    Write-Verbose "Given ConfigDir=$ConfigDir, obtain values in pyvenv.cfg"
++
++    # Ensure the file exists, and issue a warning if it doesn't (but still allow the function to continue).
++    $pyvenvConfigPath = Join-Path -Resolve -Path $ConfigDir -ChildPath 'pyvenv.cfg' -ErrorAction Continue
++
++    # An empty map will be returned if no config file is found.
++    $pyvenvConfig = @{ }
++
++    if ($pyvenvConfigPath) {
++
++        Write-Verbose "File exists, parse `key = value` lines"
++        $pyvenvConfigContent = Get-Content -Path $pyvenvConfigPath
++
++        $pyvenvConfigContent | ForEach-Object {
++            $keyval = $PSItem -split "\s*=\s*", 2
++            if ($keyval[0] -and $keyval[1]) {
++                $val = $keyval[1]
++
++                # Remove extraneous quotations around a string value.
++                if ("'""".Contains($val.Substring(0, 1))) {
++                    $val = $val.Substring(1, $val.Length - 2)
++                }
++
++                $pyvenvConfig[$keyval[0]] = $val
++                Write-Verbose "Adding Key: '$($keyval[0])'='$val'"
++            }
++        }
++    }
++    return $pyvenvConfig
++}
++
++
++<# Begin Activate script --------------------------------------------------- #>
++
++# Determine the containing directory of this script
++$VenvExecPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
++$VenvExecDir = Get-Item -Path $VenvExecPath
++
++Write-Verbose "Activation script is located in path: '$VenvExecPath'"
++Write-Verbose "VenvExecDir Fullname: '$($VenvExecDir.FullName)"
++Write-Verbose "VenvExecDir Name: '$($VenvExecDir.Name)"
++
++# Set values required in priority: CmdLine, ConfigFile, Default
++# First, get the location of the virtual environment, it might not be
++# VenvExecDir if specified on the command line.
++if ($VenvDir) {
++    Write-Verbose "VenvDir given as parameter, using '$VenvDir' to determine values"
++}
++else {
++    Write-Verbose "VenvDir not given as a parameter, using parent directory name as VenvDir."
++    $VenvDir = $VenvExecDir.Parent.FullName.TrimEnd("\\/")
++    Write-Verbose "VenvDir=$VenvDir"
++}
++
++# Next, read the `pyvenv.cfg` file to determine any required value such
++# as `prompt`.
++$pyvenvCfg = Get-PyVenvConfig -ConfigDir $VenvDir
++
++# Next, set the prompt from the command line, or the config file, or
++# just use the name of the virtual environment folder.
++if ($Prompt) {
++    Write-Verbose "Prompt specified as argument, using '$Prompt'"
++}
++else {
++    Write-Verbose "Prompt not specified as argument to script, checking pyvenv.cfg value"
++    if ($pyvenvCfg -and $pyvenvCfg['prompt']) {
++        Write-Verbose "  Setting based on value in pyvenv.cfg='$($pyvenvCfg['prompt'])'"
++        $Prompt = $pyvenvCfg['prompt'];
++    }
++    else {
++        Write-Verbose "  Setting prompt based on parent's directory's name. (Is the directory name passed to venv module when creating the virtual environment)"
++        Write-Verbose "  Got leaf-name of $VenvDir='$(Split-Path -Path $venvDir -Leaf)'"
++        $Prompt = Split-Path -Path $venvDir -Leaf
++    }
++}
++
++Write-Verbose "Prompt = '$Prompt'"
++Write-Verbose "VenvDir='$VenvDir'"
++
++# Deactivate any currently active virtual environment, but leave the
++# deactivate function in place.
++deactivate -nondestructive
++
++# Now set the environment variable VIRTUAL_ENV, used by many tools to determine
++# that there is an activated venv.
++$env:VIRTUAL_ENV = $VenvDir
++
++if (-not $Env:VIRTUAL_ENV_DISABLE_PROMPT) {
++
++    Write-Verbose "Setting prompt to '$Prompt'"
++
++    # Set the prompt to include the env name
++    # Make sure _OLD_VIRTUAL_PROMPT is global
++    function global:_OLD_VIRTUAL_PROMPT { "" }
++    Copy-Item -Path function:prompt -Destination function:_OLD_VIRTUAL_PROMPT
++    New-Variable -Name _PYTHON_VENV_PROMPT_PREFIX -Description "Python virtual environment prompt prefix" -Scope Global -Option ReadOnly -Visibility Public -Value $Prompt
++
++    function global:prompt {
++        Write-Host -NoNewline -ForegroundColor Green "($_PYTHON_VENV_PROMPT_PREFIX) "
++        _OLD_VIRTUAL_PROMPT
++    }
++    $env:VIRTUAL_ENV_PROMPT = $Prompt
++}
++
++# Clear PYTHONHOME
++if (Test-Path -Path Env:PYTHONHOME) {
++    Copy-Item -Path Env:PYTHONHOME -Destination Env:_OLD_VIRTUAL_PYTHONHOME
++    Remove-Item -Path Env:PYTHONHOME
++}
++
++# Add the venv to the PATH
++Copy-Item -Path Env:PATH -Destination Env:_OLD_VIRTUAL_PATH
++$Env:PATH = "$VenvExecDir$([System.IO.Path]::PathSeparator)$Env:PATH"
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/activate b/zajecia_15/kurs_32_zajecia_15/bin/activate
+new file mode 100644
+index 0000000..0467b81
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/activate
+@@ -0,0 +1,69 @@
++# This file must be used with "source bin/activate" *from bash*
++# you cannot run it directly
++
++deactivate () {
++    # reset old environment variables
++    if [ -n "${_OLD_VIRTUAL_PATH:-}" ] ; then
++        PATH="${_OLD_VIRTUAL_PATH:-}"
++        export PATH
++        unset _OLD_VIRTUAL_PATH
++    fi
++    if [ -n "${_OLD_VIRTUAL_PYTHONHOME:-}" ] ; then
++        PYTHONHOME="${_OLD_VIRTUAL_PYTHONHOME:-}"
++        export PYTHONHOME
++        unset _OLD_VIRTUAL_PYTHONHOME
++    fi
++
++    # This should detect bash and zsh, which have a hash command that must
++    # be called to get it to forget past commands.  Without forgetting
++    # past commands the $PATH changes we made may not be respected
++    if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
++        hash -r 2> /dev/null
++    fi
++
++    if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
++        PS1="${_OLD_VIRTUAL_PS1:-}"
++        export PS1
++        unset _OLD_VIRTUAL_PS1
++    fi
++
++    unset VIRTUAL_ENV
++    unset VIRTUAL_ENV_PROMPT
++    if [ ! "${1:-}" = "nondestructive" ] ; then
++    # Self destruct!
++        unset -f deactivate
++    fi
++}
++
++# unset irrelevant variables
++deactivate nondestructive
++
++VIRTUAL_ENV="/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15"
++export VIRTUAL_ENV
++
++_OLD_VIRTUAL_PATH="$PATH"
++PATH="$VIRTUAL_ENV/bin:$PATH"
++export PATH
++
++# unset PYTHONHOME if set
++# this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
++# could use `if (set -u; : $PYTHONHOME) ;` in bash
++if [ -n "${PYTHONHOME:-}" ] ; then
++    _OLD_VIRTUAL_PYTHONHOME="${PYTHONHOME:-}"
++    unset PYTHONHOME
++fi
++
++if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
++    _OLD_VIRTUAL_PS1="${PS1:-}"
++    PS1="(kurs_32_zajecia_15) ${PS1:-}"
++    export PS1
++    VIRTUAL_ENV_PROMPT="(kurs_32_zajecia_15) "
++    export VIRTUAL_ENV_PROMPT
++fi
++
++# This should detect bash and zsh, which have a hash command that must
++# be called to get it to forget past commands.  Without forgetting
++# past commands the $PATH changes we made may not be respected
++if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
++    hash -r 2> /dev/null
++fi
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/activate.csh b/zajecia_15/kurs_32_zajecia_15/bin/activate.csh
+new file mode 100644
+index 0000000..a473485
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/activate.csh
+@@ -0,0 +1,26 @@
++# This file must be used with "source bin/activate.csh" *from csh*.
++# You cannot run it directly.
++# Created by Davide Di Blasi <davidedb@gmail.com>.
++# Ported to Python 3.3 venv by Andrew Svetlov <andrew.svetlov@gmail.com>
++
++alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PATH" && unset _OLD_VIRTUAL_PATH; rehash; test $?_OLD_VIRTUAL_PROMPT != 0 && set prompt="$_OLD_VIRTUAL_PROMPT" && unset _OLD_VIRTUAL_PROMPT; unsetenv VIRTUAL_ENV; unsetenv VIRTUAL_ENV_PROMPT; test "\!:*" != "nondestructive" && unalias deactivate'
++
++# Unset irrelevant variables.
++deactivate nondestructive
++
++setenv VIRTUAL_ENV "/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15"
++
++set _OLD_VIRTUAL_PATH="$PATH"
++setenv PATH "$VIRTUAL_ENV/bin:$PATH"
++
++
++set _OLD_VIRTUAL_PROMPT="$prompt"
++
++if (! "$?VIRTUAL_ENV_DISABLE_PROMPT") then
++    set prompt = "(kurs_32_zajecia_15) $prompt"
++    setenv VIRTUAL_ENV_PROMPT "(kurs_32_zajecia_15) "
++endif
++
++alias pydoc python -m pydoc
++
++rehash
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/activate.fish b/zajecia_15/kurs_32_zajecia_15/bin/activate.fish
+new file mode 100644
+index 0000000..29f1921
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/activate.fish
+@@ -0,0 +1,66 @@
++# This file must be used with "source <venv>/bin/activate.fish" *from fish*
++# (https://fishshell.com/); you cannot run it directly.
++
++function deactivate  -d "Exit virtual environment and return to normal shell environment"
++    # reset old environment variables
++    if test -n "$_OLD_VIRTUAL_PATH"
++        set -gx PATH $_OLD_VIRTUAL_PATH
++        set -e _OLD_VIRTUAL_PATH
++    end
++    if test -n "$_OLD_VIRTUAL_PYTHONHOME"
++        set -gx PYTHONHOME $_OLD_VIRTUAL_PYTHONHOME
++        set -e _OLD_VIRTUAL_PYTHONHOME
++    end
++
++    if test -n "$_OLD_FISH_PROMPT_OVERRIDE"
++        functions -e fish_prompt
++        set -e _OLD_FISH_PROMPT_OVERRIDE
++        functions -c _old_fish_prompt fish_prompt
++        functions -e _old_fish_prompt
++    end
++
++    set -e VIRTUAL_ENV
++    set -e VIRTUAL_ENV_PROMPT
++    if test "$argv[1]" != "nondestructive"
++        # Self-destruct!
++        functions -e deactivate
++    end
++end
++
++# Unset irrelevant variables.
++deactivate nondestructive
++
++set -gx VIRTUAL_ENV "/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15"
++
++set -gx _OLD_VIRTUAL_PATH $PATH
++set -gx PATH "$VIRTUAL_ENV/bin" $PATH
++
++# Unset PYTHONHOME if set.
++if set -q PYTHONHOME
++    set -gx _OLD_VIRTUAL_PYTHONHOME $PYTHONHOME
++    set -e PYTHONHOME
++end
++
++if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
++    # fish uses a function instead of an env var to generate the prompt.
++
++    # Save the current fish_prompt function as the function _old_fish_prompt.
++    functions -c fish_prompt _old_fish_prompt
++
++    # With the original prompt function renamed, we can override with our own.
++    function fish_prompt
++        # Save the return status of the last command.
++        set -l old_status $status
++
++        # Output the venv prompt; color taken from the blue of the Python logo.
++        printf "%s%s%s" (set_color 4B8BBE) "(kurs_32_zajecia_15) " (set_color normal)
++
++        # Restore the return status of the previous command.
++        echo "exit $old_status" | .
++        # Output the original/"old" prompt.
++        _old_fish_prompt
++    end
++
++    set -gx _OLD_FISH_PROMPT_OVERRIDE "$VIRTUAL_ENV"
++    set -gx VIRTUAL_ENV_PROMPT "(kurs_32_zajecia_15) "
++end
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/normalizer b/zajecia_15/kurs_32_zajecia_15/bin/normalizer
+new file mode 100755
+index 0000000..b8fa4f5
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/normalizer
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from charset_normalizer.cli import cli_detect
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(cli_detect())
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/pip b/zajecia_15/kurs_32_zajecia_15/bin/pip
+new file mode 100755
+index 0000000..db7192d
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/pip
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/pip3 b/zajecia_15/kurs_32_zajecia_15/bin/pip3
+new file mode 100755
+index 0000000..db7192d
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/pip3
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/pip3.10 b/zajecia_15/kurs_32_zajecia_15/bin/pip3.10
+new file mode 100755
+index 0000000..db7192d
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/pip3.10
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/python b/zajecia_15/kurs_32_zajecia_15/bin/python
+new file mode 120000
+index 0000000..8138d36
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/python
+@@ -0,0 +1 @@
++/home/michal/.pyenv/versions/3.10.6/bin/python
+\ No newline at end of file
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/python3 b/zajecia_15/kurs_32_zajecia_15/bin/python3
+new file mode 120000
+index 0000000..d8654aa
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/python3
+@@ -0,0 +1 @@
++python
+\ No newline at end of file
+diff --git a/zajecia_15/kurs_32_zajecia_15/bin/python3.10 b/zajecia_15/kurs_32_zajecia_15/bin/python3.10
+new file mode 120000
+index 0000000..d8654aa
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/bin/python3.10
+@@ -0,0 +1 @@
++python
+\ No newline at end of file
+diff --git a/zajecia_15/kurs_32_zajecia_15/lib64 b/zajecia_15/kurs_32_zajecia_15/lib64
+new file mode 120000
+index 0000000..7951405
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/lib64
+@@ -0,0 +1 @@
++lib
+\ No newline at end of file
+diff --git a/zajecia_15/kurs_32_zajecia_15/pyvenv.cfg b/zajecia_15/kurs_32_zajecia_15/pyvenv.cfg
+new file mode 100644
+index 0000000..ecc5d63
+--- /dev/null
++++ b/zajecia_15/kurs_32_zajecia_15/pyvenv.cfg
+@@ -0,0 +1,3 @@
++home = /home/michal/.pyenv/versions/3.10.6/bin
++include-system-site-packages = false
++version = 3.10.6
+diff --git a/zajecia_15/requests_test.py b/zajecia_15/requests_test.py
+new file mode 100644
+index 0000000..56dccea
+--- /dev/null
++++ b/zajecia_15/requests_test.py
+@@ -0,0 +1,4 @@
++import requests
++
++onet_response = requests.get("http://www.onet.pl")
++print(onet_response)
+\ No newline at end of file
+diff --git a/zajecia_15/requirements.txt b/zajecia_15/requirements.txt
+new file mode 100644
+index 0000000..5997b18
+--- /dev/null
++++ b/zajecia_15/requirements.txt
+@@ -0,0 +1,8 @@
++certifi==2024.8.30
++charset-normalizer==3.4.0
++DateTime==5.5
++idna==3.10
++pytz==2024.2
++requests==2.32.3
++urllib3==2.2.3
++zope.interface==7.1.1
+diff --git a/zajecia_15/skrotowe_operacje.py b/zajecia_15/skrotowe_operacje.py
+new file mode 100644
+index 0000000..49434b8
+--- /dev/null
++++ b/zajecia_15/skrotowe_operacje.py
+@@ -0,0 +1,74 @@
++import random
++
++# age = int(input("Podaj swoj wiek: "))
++# if age >= 18:
++#     is_adult = True
++# else:
++#     is_adult = False
++#
++# print(is_adult)
++#
++# is_adult = True if age >= 18 else False
++#
++# print(is_adult)
++from zajecia_11.funkcje_args_kwargs import lista
++
++# nazwa_zmiennej = pierwsza_wartosc if <instrukcja warunkowa, ktora jest zgodna z pierwsza wartoscia> else druga_wartosc
++
++
++uczniowie = ["Michal", "ADAM", "WoJtEk", "zoSia", "gosiA"]
++
++# poprawieni_uczniowie = []
++# for uczen in uczniowie:
++#     poprawieni_uczniowie.append(uczen.capitalize())
++#
++# print(poprawieni_uczniowie)
++#
++# poprawieni_uczniowie_list_comprehension = [uczen.capitalize() for uczen in uczniowie]
++#
++#
++#
++# #skladnia
++# # nowa_lista = [<wartosc, ktora ma byc w liscie> for tymczasowa_zmienna_do_iteracji in <obiekt iterowalny> ]
++#
++# print(poprawieni_uczniowie_list_comprehension)
++
++
++lista_uczennic = []
++for uczen in uczniowie:
++    if uczen.lower()[-1] == "a":
++        lista_uczennic.append(uczen.capitalize())
++
++print(lista_uczennic)
++
++lista_uczennic_druga_opcja = [uczen.capitalize() for uczen in uczniowie if uczen.lower()[-1] == "a"]
++lista_uczniow_meskich = [uczen.capitalize() for uczen in uczniowie if uczen.lower()[-1] != "a"]
++
++
++#skladnia
++
++# nowa_lista = [wartosc_do_listy for tymczasowa_zmienna in obiekt_iterowalny if warunek]
++
++print(lista_uczennic_druga_opcja)
++print(lista_uczniow_meskich)
++
++kolory = {"zielony", "niebieski", "czerwony"}
++
++kolory_capitalize = {kolor.capitalize() for kolor in kolory}
++
++print(kolory_capitalize)
++
++przedmioty_zosi = ["niemiecki", "angielski", "historia", "polski", "matematyka", "fizyka", "chemia", "biologia"]
++
++oceny_zosi = {}
++lista_ocen_zosi = []
++for przedmiot in przedmioty_zosi:
++    oceny_zosi[przedmiot] = random.randint(1, 6)
++    lista_ocen_zosi.append(random.randint(1, 6))
++
++print(oceny_zosi)
++
++# pozytywne_oceny_zosi = {przedmiot: ocena for przedmiot, ocena in oceny_zosi.items() if ocena > 1}
++# pozytywne_oceny_zosi = [ocena for przedmiot, ocena in oceny_zosi.items() if ocena > 1]
++#
++# print(pozytywne_oceny_zosi)
+\ No newline at end of file
+diff --git a/zajecia_16/countres_data.json b/zajecia_16/countres_data.json
+new file mode 100644
+index 0000000..29eb533
+--- /dev/null
++++ b/zajecia_16/countres_data.json
+@@ -0,0 +1 @@
++{"Poland": {"nazwa": "Poland", "stolica": ["Warsaw"], "region": "Europe", "podregion": "Central Europe", "populacja": 37950802, "jezyki_urzedowe": {"pol": "Polish"}, "flaga": "\ud83c\uddf5\ud83c\uddf1"}, "Sweden": {"nazwa": "Sweden", "stolica": ["Stockholm"], "region": "Europe", "podregion": "Northern Europe", "populacja": 10353442, "jezyki_urzedowe": {"swe": "Swedish"}, "flaga": "\ud83c\uddf8\ud83c\uddea"}, "Norway": {"nazwa": "Norway", "stolica": ["Oslo"], "region": "Europe", "podregion": "Northern Europe", "populacja": 5379475, "jezyki_urzedowe": {"nno": "Norwegian Nynorsk", "nob": "Norwegian Bokm\u00e5l", "smi": "Sami"}, "flaga": "\ud83c\uddf3\ud83c\uddf4"}}
+\ No newline at end of file
+diff --git a/zajecia_16/countries_selector/bin/Activate.ps1 b/zajecia_16/countries_selector/bin/Activate.ps1
+new file mode 100644
+index 0000000..b49d77b
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/Activate.ps1
+@@ -0,0 +1,247 @@
++<#
++.Synopsis
++Activate a Python virtual environment for the current PowerShell session.
++
++.Description
++Pushes the python executable for a virtual environment to the front of the
++$Env:PATH environment variable and sets the prompt to signify that you are
++in a Python virtual environment. Makes use of the command line switches as
++well as the `pyvenv.cfg` file values present in the virtual environment.
++
++.Parameter VenvDir
++Path to the directory that contains the virtual environment to activate. The
++default value for this is the parent of the directory that the Activate.ps1
++script is located within.
++
++.Parameter Prompt
++The prompt prefix to display when this virtual environment is activated. By
++default, this prompt is the name of the virtual environment folder (VenvDir)
++surrounded by parentheses and followed by a single space (ie. '(.venv) ').
++
++.Example
++Activate.ps1
++Activates the Python virtual environment that contains the Activate.ps1 script.
++
++.Example
++Activate.ps1 -Verbose
++Activates the Python virtual environment that contains the Activate.ps1 script,
++and shows extra information about the activation as it executes.
++
++.Example
++Activate.ps1 -VenvDir C:\Users\MyUser\Common\.venv
++Activates the Python virtual environment located in the specified location.
++
++.Example
++Activate.ps1 -Prompt "MyPython"
++Activates the Python virtual environment that contains the Activate.ps1 script,
++and prefixes the current prompt with the specified string (surrounded in
++parentheses) while the virtual environment is active.
++
++.Notes
++On Windows, it may be required to enable this Activate.ps1 script by setting the
++execution policy for the user. You can do this by issuing the following PowerShell
++command:
++
++PS C:\> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
++
++For more information on Execution Policies: 
++https://go.microsoft.com/fwlink/?LinkID=135170
++
++#>
++Param(
++    [Parameter(Mandatory = $false)]
++    [String]
++    $VenvDir,
++    [Parameter(Mandatory = $false)]
++    [String]
++    $Prompt
++)
++
++<# Function declarations --------------------------------------------------- #>
++
++<#
++.Synopsis
++Remove all shell session elements added by the Activate script, including the
++addition of the virtual environment's Python executable from the beginning of
++the PATH variable.
++
++.Parameter NonDestructive
++If present, do not remove this function from the global namespace for the
++session.
++
++#>
++function global:deactivate ([switch]$NonDestructive) {
++    # Revert to original values
++
++    # The prior prompt:
++    if (Test-Path -Path Function:_OLD_VIRTUAL_PROMPT) {
++        Copy-Item -Path Function:_OLD_VIRTUAL_PROMPT -Destination Function:prompt
++        Remove-Item -Path Function:_OLD_VIRTUAL_PROMPT
++    }
++
++    # The prior PYTHONHOME:
++    if (Test-Path -Path Env:_OLD_VIRTUAL_PYTHONHOME) {
++        Copy-Item -Path Env:_OLD_VIRTUAL_PYTHONHOME -Destination Env:PYTHONHOME
++        Remove-Item -Path Env:_OLD_VIRTUAL_PYTHONHOME
++    }
++
++    # The prior PATH:
++    if (Test-Path -Path Env:_OLD_VIRTUAL_PATH) {
++        Copy-Item -Path Env:_OLD_VIRTUAL_PATH -Destination Env:PATH
++        Remove-Item -Path Env:_OLD_VIRTUAL_PATH
++    }
++
++    # Just remove the VIRTUAL_ENV altogether:
++    if (Test-Path -Path Env:VIRTUAL_ENV) {
++        Remove-Item -Path env:VIRTUAL_ENV
++    }
++
++    # Just remove VIRTUAL_ENV_PROMPT altogether.
++    if (Test-Path -Path Env:VIRTUAL_ENV_PROMPT) {
++        Remove-Item -Path env:VIRTUAL_ENV_PROMPT
++    }
++
++    # Just remove the _PYTHON_VENV_PROMPT_PREFIX altogether:
++    if (Get-Variable -Name "_PYTHON_VENV_PROMPT_PREFIX" -ErrorAction SilentlyContinue) {
++        Remove-Variable -Name _PYTHON_VENV_PROMPT_PREFIX -Scope Global -Force
++    }
++
++    # Leave deactivate function in the global namespace if requested:
++    if (-not $NonDestructive) {
++        Remove-Item -Path function:deactivate
++    }
++}
++
++<#
++.Description
++Get-PyVenvConfig parses the values from the pyvenv.cfg file located in the
++given folder, and returns them in a map.
++
++For each line in the pyvenv.cfg file, if that line can be parsed into exactly
++two strings separated by `=` (with any amount of whitespace surrounding the =)
++then it is considered a `key = value` line. The left hand string is the key,
++the right hand is the value.
++
++If the value starts with a `'` or a `"` then the first and last character is
++stripped from the value before being captured.
++
++.Parameter ConfigDir
++Path to the directory that contains the `pyvenv.cfg` file.
++#>
++function Get-PyVenvConfig(
++    [String]
++    $ConfigDir
++) {
++    Write-Verbose "Given ConfigDir=$ConfigDir, obtain values in pyvenv.cfg"
++
++    # Ensure the file exists, and issue a warning if it doesn't (but still allow the function to continue).
++    $pyvenvConfigPath = Join-Path -Resolve -Path $ConfigDir -ChildPath 'pyvenv.cfg' -ErrorAction Continue
++
++    # An empty map will be returned if no config file is found.
++    $pyvenvConfig = @{ }
++
++    if ($pyvenvConfigPath) {
++
++        Write-Verbose "File exists, parse `key = value` lines"
++        $pyvenvConfigContent = Get-Content -Path $pyvenvConfigPath
++
++        $pyvenvConfigContent | ForEach-Object {
++            $keyval = $PSItem -split "\s*=\s*", 2
++            if ($keyval[0] -and $keyval[1]) {
++                $val = $keyval[1]
++
++                # Remove extraneous quotations around a string value.
++                if ("'""".Contains($val.Substring(0, 1))) {
++                    $val = $val.Substring(1, $val.Length - 2)
++                }
++
++                $pyvenvConfig[$keyval[0]] = $val
++                Write-Verbose "Adding Key: '$($keyval[0])'='$val'"
++            }
++        }
++    }
++    return $pyvenvConfig
++}
++
++
++<# Begin Activate script --------------------------------------------------- #>
++
++# Determine the containing directory of this script
++$VenvExecPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
++$VenvExecDir = Get-Item -Path $VenvExecPath
++
++Write-Verbose "Activation script is located in path: '$VenvExecPath'"
++Write-Verbose "VenvExecDir Fullname: '$($VenvExecDir.FullName)"
++Write-Verbose "VenvExecDir Name: '$($VenvExecDir.Name)"
++
++# Set values required in priority: CmdLine, ConfigFile, Default
++# First, get the location of the virtual environment, it might not be
++# VenvExecDir if specified on the command line.
++if ($VenvDir) {
++    Write-Verbose "VenvDir given as parameter, using '$VenvDir' to determine values"
++}
++else {
++    Write-Verbose "VenvDir not given as a parameter, using parent directory name as VenvDir."
++    $VenvDir = $VenvExecDir.Parent.FullName.TrimEnd("\\/")
++    Write-Verbose "VenvDir=$VenvDir"
++}
++
++# Next, read the `pyvenv.cfg` file to determine any required value such
++# as `prompt`.
++$pyvenvCfg = Get-PyVenvConfig -ConfigDir $VenvDir
++
++# Next, set the prompt from the command line, or the config file, or
++# just use the name of the virtual environment folder.
++if ($Prompt) {
++    Write-Verbose "Prompt specified as argument, using '$Prompt'"
++}
++else {
++    Write-Verbose "Prompt not specified as argument to script, checking pyvenv.cfg value"
++    if ($pyvenvCfg -and $pyvenvCfg['prompt']) {
++        Write-Verbose "  Setting based on value in pyvenv.cfg='$($pyvenvCfg['prompt'])'"
++        $Prompt = $pyvenvCfg['prompt'];
++    }
++    else {
++        Write-Verbose "  Setting prompt based on parent's directory's name. (Is the directory name passed to venv module when creating the virtual environment)"
++        Write-Verbose "  Got leaf-name of $VenvDir='$(Split-Path -Path $venvDir -Leaf)'"
++        $Prompt = Split-Path -Path $venvDir -Leaf
++    }
++}
++
++Write-Verbose "Prompt = '$Prompt'"
++Write-Verbose "VenvDir='$VenvDir'"
++
++# Deactivate any currently active virtual environment, but leave the
++# deactivate function in place.
++deactivate -nondestructive
++
++# Now set the environment variable VIRTUAL_ENV, used by many tools to determine
++# that there is an activated venv.
++$env:VIRTUAL_ENV = $VenvDir
++
++if (-not $Env:VIRTUAL_ENV_DISABLE_PROMPT) {
++
++    Write-Verbose "Setting prompt to '$Prompt'"
++
++    # Set the prompt to include the env name
++    # Make sure _OLD_VIRTUAL_PROMPT is global
++    function global:_OLD_VIRTUAL_PROMPT { "" }
++    Copy-Item -Path function:prompt -Destination function:_OLD_VIRTUAL_PROMPT
++    New-Variable -Name _PYTHON_VENV_PROMPT_PREFIX -Description "Python virtual environment prompt prefix" -Scope Global -Option ReadOnly -Visibility Public -Value $Prompt
++
++    function global:prompt {
++        Write-Host -NoNewline -ForegroundColor Green "($_PYTHON_VENV_PROMPT_PREFIX) "
++        _OLD_VIRTUAL_PROMPT
++    }
++    $env:VIRTUAL_ENV_PROMPT = $Prompt
++}
++
++# Clear PYTHONHOME
++if (Test-Path -Path Env:PYTHONHOME) {
++    Copy-Item -Path Env:PYTHONHOME -Destination Env:_OLD_VIRTUAL_PYTHONHOME
++    Remove-Item -Path Env:PYTHONHOME
++}
++
++# Add the venv to the PATH
++Copy-Item -Path Env:PATH -Destination Env:_OLD_VIRTUAL_PATH
++$Env:PATH = "$VenvExecDir$([System.IO.Path]::PathSeparator)$Env:PATH"
+diff --git a/zajecia_16/countries_selector/bin/activate b/zajecia_16/countries_selector/bin/activate
+new file mode 100644
+index 0000000..a5153f8
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/activate
+@@ -0,0 +1,69 @@
++# This file must be used with "source bin/activate" *from bash*
++# you cannot run it directly
++
++deactivate () {
++    # reset old environment variables
++    if [ -n "${_OLD_VIRTUAL_PATH:-}" ] ; then
++        PATH="${_OLD_VIRTUAL_PATH:-}"
++        export PATH
++        unset _OLD_VIRTUAL_PATH
++    fi
++    if [ -n "${_OLD_VIRTUAL_PYTHONHOME:-}" ] ; then
++        PYTHONHOME="${_OLD_VIRTUAL_PYTHONHOME:-}"
++        export PYTHONHOME
++        unset _OLD_VIRTUAL_PYTHONHOME
++    fi
++
++    # This should detect bash and zsh, which have a hash command that must
++    # be called to get it to forget past commands.  Without forgetting
++    # past commands the $PATH changes we made may not be respected
++    if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
++        hash -r 2> /dev/null
++    fi
++
++    if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
++        PS1="${_OLD_VIRTUAL_PS1:-}"
++        export PS1
++        unset _OLD_VIRTUAL_PS1
++    fi
++
++    unset VIRTUAL_ENV
++    unset VIRTUAL_ENV_PROMPT
++    if [ ! "${1:-}" = "nondestructive" ] ; then
++    # Self destruct!
++        unset -f deactivate
++    fi
++}
++
++# unset irrelevant variables
++deactivate nondestructive
++
++VIRTUAL_ENV="/home/michal/future_collars/kurs32/zajecia_16/countries_selector"
++export VIRTUAL_ENV
++
++_OLD_VIRTUAL_PATH="$PATH"
++PATH="$VIRTUAL_ENV/bin:$PATH"
++export PATH
++
++# unset PYTHONHOME if set
++# this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
++# could use `if (set -u; : $PYTHONHOME) ;` in bash
++if [ -n "${PYTHONHOME:-}" ] ; then
++    _OLD_VIRTUAL_PYTHONHOME="${PYTHONHOME:-}"
++    unset PYTHONHOME
++fi
++
++if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
++    _OLD_VIRTUAL_PS1="${PS1:-}"
++    PS1="(countries_selector) ${PS1:-}"
++    export PS1
++    VIRTUAL_ENV_PROMPT="(countries_selector) "
++    export VIRTUAL_ENV_PROMPT
++fi
++
++# This should detect bash and zsh, which have a hash command that must
++# be called to get it to forget past commands.  Without forgetting
++# past commands the $PATH changes we made may not be respected
++if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
++    hash -r 2> /dev/null
++fi
+diff --git a/zajecia_16/countries_selector/bin/activate.csh b/zajecia_16/countries_selector/bin/activate.csh
+new file mode 100644
+index 0000000..1ca5690
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/activate.csh
+@@ -0,0 +1,26 @@
++# This file must be used with "source bin/activate.csh" *from csh*.
++# You cannot run it directly.
++# Created by Davide Di Blasi <davidedb@gmail.com>.
++# Ported to Python 3.3 venv by Andrew Svetlov <andrew.svetlov@gmail.com>
++
++alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PATH" && unset _OLD_VIRTUAL_PATH; rehash; test $?_OLD_VIRTUAL_PROMPT != 0 && set prompt="$_OLD_VIRTUAL_PROMPT" && unset _OLD_VIRTUAL_PROMPT; unsetenv VIRTUAL_ENV; unsetenv VIRTUAL_ENV_PROMPT; test "\!:*" != "nondestructive" && unalias deactivate'
++
++# Unset irrelevant variables.
++deactivate nondestructive
++
++setenv VIRTUAL_ENV "/home/michal/future_collars/kurs32/zajecia_16/countries_selector"
++
++set _OLD_VIRTUAL_PATH="$PATH"
++setenv PATH "$VIRTUAL_ENV/bin:$PATH"
++
++
++set _OLD_VIRTUAL_PROMPT="$prompt"
++
++if (! "$?VIRTUAL_ENV_DISABLE_PROMPT") then
++    set prompt = "(countries_selector) $prompt"
++    setenv VIRTUAL_ENV_PROMPT "(countries_selector) "
++endif
++
++alias pydoc python -m pydoc
++
++rehash
+diff --git a/zajecia_16/countries_selector/bin/activate.fish b/zajecia_16/countries_selector/bin/activate.fish
+new file mode 100644
+index 0000000..d597257
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/activate.fish
+@@ -0,0 +1,66 @@
++# This file must be used with "source <venv>/bin/activate.fish" *from fish*
++# (https://fishshell.com/); you cannot run it directly.
++
++function deactivate  -d "Exit virtual environment and return to normal shell environment"
++    # reset old environment variables
++    if test -n "$_OLD_VIRTUAL_PATH"
++        set -gx PATH $_OLD_VIRTUAL_PATH
++        set -e _OLD_VIRTUAL_PATH
++    end
++    if test -n "$_OLD_VIRTUAL_PYTHONHOME"
++        set -gx PYTHONHOME $_OLD_VIRTUAL_PYTHONHOME
++        set -e _OLD_VIRTUAL_PYTHONHOME
++    end
++
++    if test -n "$_OLD_FISH_PROMPT_OVERRIDE"
++        functions -e fish_prompt
++        set -e _OLD_FISH_PROMPT_OVERRIDE
++        functions -c _old_fish_prompt fish_prompt
++        functions -e _old_fish_prompt
++    end
++
++    set -e VIRTUAL_ENV
++    set -e VIRTUAL_ENV_PROMPT
++    if test "$argv[1]" != "nondestructive"
++        # Self-destruct!
++        functions -e deactivate
++    end
++end
++
++# Unset irrelevant variables.
++deactivate nondestructive
++
++set -gx VIRTUAL_ENV "/home/michal/future_collars/kurs32/zajecia_16/countries_selector"
++
++set -gx _OLD_VIRTUAL_PATH $PATH
++set -gx PATH "$VIRTUAL_ENV/bin" $PATH
++
++# Unset PYTHONHOME if set.
++if set -q PYTHONHOME
++    set -gx _OLD_VIRTUAL_PYTHONHOME $PYTHONHOME
++    set -e PYTHONHOME
++end
++
++if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
++    # fish uses a function instead of an env var to generate the prompt.
++
++    # Save the current fish_prompt function as the function _old_fish_prompt.
++    functions -c fish_prompt _old_fish_prompt
++
++    # With the original prompt function renamed, we can override with our own.
++    function fish_prompt
++        # Save the return status of the last command.
++        set -l old_status $status
++
++        # Output the venv prompt; color taken from the blue of the Python logo.
++        printf "%s%s%s" (set_color 4B8BBE) "(countries_selector) " (set_color normal)
++
++        # Restore the return status of the previous command.
++        echo "exit $old_status" | .
++        # Output the original/"old" prompt.
++        _old_fish_prompt
++    end
++
++    set -gx _OLD_FISH_PROMPT_OVERRIDE "$VIRTUAL_ENV"
++    set -gx VIRTUAL_ENV_PROMPT "(countries_selector) "
++end
+diff --git a/zajecia_16/countries_selector/bin/normalizer b/zajecia_16/countries_selector/bin/normalizer
+new file mode 100755
+index 0000000..37df0d0
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/normalizer
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_16/countries_selector/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from charset_normalizer.cli import cli_detect
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(cli_detect())
+diff --git a/zajecia_16/countries_selector/bin/pip b/zajecia_16/countries_selector/bin/pip
+new file mode 100755
+index 0000000..810eb13
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/pip
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_16/countries_selector/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_16/countries_selector/bin/pip3 b/zajecia_16/countries_selector/bin/pip3
+new file mode 100755
+index 0000000..810eb13
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/pip3
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_16/countries_selector/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_16/countries_selector/bin/pip3.10 b/zajecia_16/countries_selector/bin/pip3.10
+new file mode 100755
+index 0000000..810eb13
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/pip3.10
+@@ -0,0 +1,8 @@
++#!/home/michal/future_collars/kurs32/zajecia_16/countries_selector/bin/python
++# -*- coding: utf-8 -*-
++import re
++import sys
++from pip._internal.cli.main import main
++if __name__ == '__main__':
++    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
++    sys.exit(main())
+diff --git a/zajecia_16/countries_selector/bin/python b/zajecia_16/countries_selector/bin/python
+new file mode 120000
+index 0000000..192eb12
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/python
+@@ -0,0 +1 @@
++/home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin/python
+\ No newline at end of file
+diff --git a/zajecia_16/countries_selector/bin/python3 b/zajecia_16/countries_selector/bin/python3
+new file mode 120000
+index 0000000..d8654aa
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/python3
+@@ -0,0 +1 @@
++python
+\ No newline at end of file
+diff --git a/zajecia_16/countries_selector/bin/python3.10 b/zajecia_16/countries_selector/bin/python3.10
+new file mode 120000
+index 0000000..d8654aa
+--- /dev/null
++++ b/zajecia_16/countries_selector/bin/python3.10
+@@ -0,0 +1 @@
++python
+\ No newline at end of file
+diff --git a/zajecia_16/countries_selector/lib64 b/zajecia_16/countries_selector/lib64
+new file mode 120000
+index 0000000..7951405
+--- /dev/null
++++ b/zajecia_16/countries_selector/lib64
+@@ -0,0 +1 @@
++lib
+\ No newline at end of file
+diff --git a/zajecia_16/countries_selector/pyvenv.cfg b/zajecia_16/countries_selector/pyvenv.cfg
+new file mode 100644
+index 0000000..0d9eb2b
+--- /dev/null
++++ b/zajecia_16/countries_selector/pyvenv.cfg
+@@ -0,0 +1,3 @@
++home = /home/michal/future_collars/kurs32/zajecia_15/kurs_32_zajecia_15/bin
++include-system-site-packages = false
++version = 3.10.6
+diff --git a/zajecia_16/file_handler.py b/zajecia_16/file_handler.py
+new file mode 100644
+index 0000000..84ce208
+--- /dev/null
++++ b/zajecia_16/file_handler.py
+@@ -0,0 +1,26 @@
++import json
++
++
++class FileHandler:
++    def __init__(self, file):
++        self.file = file
++        self.data = self.load_data_from_file()
++
++    def load_data_from_file(self):
++        with open(self.file) as file:
++            return json.loads(file.read())
++
++    def save_data_to_file(self):
++        with open(self.file, mode="w") as file:
++            file.write(json.dumps(self.data))
++
++    def add_new_country_to_data(self, country_name, country_data):
++        self.data[country_name] = country_data
++
++    def get_data_from_file(self, country_name):
++        # for key, value in self.data.items():
++        #     if key == country_name:
++        #         return value
++        if country_name in self.data.keys():
++            return self.data.get(country_name)
++
+diff --git a/zajecia_16/runner.py b/zajecia_16/runner.py
+new file mode 100644
+index 0000000..cb2ef28
+--- /dev/null
++++ b/zajecia_16/runner.py
+@@ -0,0 +1,45 @@
++"""
++**Zadanie: Napisz program, który dostarczy informacji o wybranym kraju. Użyj do tego poniższego API Rest Countries. Aplikacja ma działać następująco:**
++• Program pyta użytkownika o nazwę kraju, dla którego należy sprawdzić informacje. Nazwa kraju musi być podana w języku angielskim i pozwala na pełne lub częściowe dopasowanie.
++• Aplikacja wykona zapytanie do API w celu pozyskania danych o kraju.
++• Program powinien wyświetlić następujące informacje o kraju (jeżeli są dostępne):
++    ◦ Pełna nazwa kraju
++    ◦ Stolica
++    ◦ Region
++    ◦ Podregion
++    ◦ Populacja
++    ◦ Języki urzędowe
++    ◦ Waluta
++    ◦ Flagę (poprzez URL do obrazka)
++• Wyniki zapytań powinny być zapisywane do pliku. Jeżeli szukany kraj znajduje się już w pliku, nie wykonuj zapytania do API, tylko zwróć wynik z pliku.
++URL do API:
++https://restcountries.com/v3.1/name/{country_name}?fullText=true
++W URL należy uzupełnić parametr: country_name
++Przykładowy funkcjonalny rezultat dla zapytania "Poland":
++Pełna nazwa: Republic of Poland
++Stolica: Warsaw
++Region: Europe
++Podregion: Eastern Europe
++Populacja: 37970000
++Języki urzędowe: Polish
++Waluta: Polish złoty (PLN)
++Flaga: https://flagcdn.com/pl.svg
++**Wskazówka:** Możesz wymagać od użytkownika podania pełnej nazwy kraju (ustawiając parametr fullText na true w URL) lub pozwolić na wyszukiwanie zarówno pełnych, jak i częściowych nazw kraju (bez parametru fullText).
++"""
++from utils import retrieve_data_from_api
++from file_handler import FileHandler
++
++file_handler = FileHandler(file="countres_data.json")
++
++country_selected_by_user = input("Podaj mi kraj, jaki chcesz sprawdzić: ")
++
++data_in_memory = file_handler.get_data_from_file(country_selected_by_user)
++if data_in_memory:
++    print(data_in_memory)
++    print("Dane dostarczone z pliku")
++else:
++    country_info = retrieve_data_from_api(country_selected_by_user)
++    print("Dane dostarczone z API")
++    file_handler.add_new_country_to_data(country_selected_by_user, country_info)
++    file_handler.save_data_to_file()
++    print(country_info)
+\ No newline at end of file
+diff --git a/zajecia_16/utils.py b/zajecia_16/utils.py
+new file mode 100644
+index 0000000..39bdc21
+--- /dev/null
++++ b/zajecia_16/utils.py
+@@ -0,0 +1,22 @@
++import requests
++
++def retrieve_data_from_api(country_name):
++    url_address = f"https://restcountries.com/v3.1/name/{country_name}?fullText=true"
++    response = requests.get(url_address)
++    if response.status_code == 200:
++        print("Udalo sie pobrac dane")
++        return parse_data_from_api(response.json())
++    else:
++        print(response.json())
++        print("Nie udało się pobrać danych z API")
++
++def parse_data_from_api(response_text):
++    return {
++        "nazwa": response_text[0].get("name").get("common"),
++        "stolica": response_text[0].get("capital"),
++        "region": response_text[0].get("region"),
++        "podregion": response_text[0].get("subregion"),
++        "populacja": response_text[0].get("population"),
++        "jezyki_urzedowe": response_text[0].get("languages"),
++        "flaga": response_text[0].get("flag")
++    }
+diff --git a/zajecia_16/weather_data.json b/zajecia_16/weather_data.json
+new file mode 100644
+index 0000000..e4f7359
+--- /dev/null
++++ b/zajecia_16/weather_data.json
+@@ -0,0 +1,6 @@
++{
++  "Szczecin": {
++    "2024-11-20": "Pada",
++    "2024-11-18": "Nie pada"
++  }
++}
+\ No newline at end of file
+diff --git a/zajecia_16/weather_example.py b/zajecia_16/weather_example.py
+new file mode 100644
+index 0000000..6accd26
+--- /dev/null
++++ b/zajecia_16/weather_example.py
+@@ -0,0 +1,7 @@
++from geopy.geocoders import Nominatim
++geolocator = Nominatim(user_agent="michal_zietkowski_mz")
++city = input("Podaj swoje miasto")
++location = geolocator.geocode(city)
++print(location.address)
++print((location.latitude, location.longitude))
++print(location.raw)
+\ No newline at end of file
+-- 
+2.25.1
+

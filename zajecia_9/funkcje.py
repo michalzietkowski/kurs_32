@@ -60,8 +60,7 @@ lista_uczniow = [
 #         print("Nie znaleźliśmy ucznia!")
 
 
-def znajdz_ucznia_w_liscie(imie_ucznia, nazwisko_ucznia, klasa_ucznia="0"):
-    print(klasa_ucznia)
+def znajdz_ucznia_w_liscie(imie_ucznia, nazwisko_ucznia, klasa_ucznia):
     for uczen in lista_uczniow:
         if (
             uczen.get("imie") == imie_ucznia

@@ -1,0 +1,842 @@
+From 78fbec894c590238186b1d9b6f4023a83acf695d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20Zi=C4=99tkowski?=
+ <michal.zietkowski@stxnext.pl>
+Date: Mon, 30 Dec 2024 13:43:35 +0100
+Subject: [PATCH 2/2] kolejne zajecia
+
+---
+ dummy.py                                      | 10 +++
+ zajecia_17/first_example.txt                  | 10 +++
+ .../gettery_settery_funkcje_magiczne.py       | 44 +++++++++
+ zajecia_17/iterator_z_funkcja_next.py         | 31 +++++++
+ zajecia_17/iterators.py                       | 89 +++++++++++++++++++
+ zajecia_17/przyklad_z_zuzyciem_danych.py      | 35 ++++++++
+ zajecia_18/data.json                          |  6 ++
+ zajecia_18/file_handler.py                    | 36 ++++++++
+ zajecia_18/lambdy.py                          | 23 +++++
+ zajecia_18/runnable.py                        | 17 ++++
+ zajecia_19/abstrakcja.py                      | 79 ++++++++++++++++
+ zajecia_19/dziedziczenie.py                   | 63 +++++++++++++
+ zajecia_19/funkcje_klasowe_i_statyczne.py     | 67 ++++++++++++++
+ zajecia_19/hermetyzacja.py                    | 19 ++++
+ zajecia_19/kompozycja.py                      | 30 +++++++
+ zajecia_19/polimorfizm.py                     | 26 ++++++
+ zajecia_19/wyjatki.py                         | 22 +++++
+ zajecia_20/file_handler.py                    | 38 ++++++++
+ zajecia_20/matrix_transform.py                | 13 +++
+ zajecia_9/funkcje.py                          |  3 +-
+ 20 files changed, 659 insertions(+), 2 deletions(-)
+ create mode 100644 zajecia_17/first_example.txt
+ create mode 100644 zajecia_17/gettery_settery_funkcje_magiczne.py
+ create mode 100644 zajecia_17/iterator_z_funkcja_next.py
+ create mode 100644 zajecia_17/iterators.py
+ create mode 100644 zajecia_17/przyklad_z_zuzyciem_danych.py
+ create mode 100644 zajecia_18/data.json
+ create mode 100644 zajecia_18/file_handler.py
+ create mode 100644 zajecia_18/lambdy.py
+ create mode 100644 zajecia_18/runnable.py
+ create mode 100644 zajecia_19/abstrakcja.py
+ create mode 100644 zajecia_19/dziedziczenie.py
+ create mode 100644 zajecia_19/funkcje_klasowe_i_statyczne.py
+ create mode 100644 zajecia_19/hermetyzacja.py
+ create mode 100644 zajecia_19/kompozycja.py
+ create mode 100644 zajecia_19/polimorfizm.py
+ create mode 100644 zajecia_19/wyjatki.py
+ create mode 100644 zajecia_20/file_handler.py
+ create mode 100644 zajecia_20/matrix_transform.py
+
+diff --git a/dummy.py b/dummy.py
+index e69de29..0d1735d 100644
+--- a/dummy.py
++++ b/dummy.py
+@@ -0,0 +1,10 @@
++from itertools import islice
++
++def read_large_log(file_path, start_line, end_line):
++    with open(file_path, 'r') as log_file:
++        # Pobierz tylko wybrane linie z dużego pliku logów
++        for line in islice(log_file, start_line, end_line):
++            print(line.strip())
++
++# Przykład: czytanie linii 10-20 z ogromnego pliku logów
++read_large_log("large_log_file.txt", 10, 20)
+diff --git a/zajecia_17/first_example.txt b/zajecia_17/first_example.txt
+new file mode 100644
+index 0000000..0b669b6
+--- /dev/null
++++ b/zajecia_17/first_example.txt
+@@ -0,0 +1,10 @@
++1
++2
++3
++4
++5
++6
++7
++8
++9
++10
+\ No newline at end of file
+diff --git a/zajecia_17/gettery_settery_funkcje_magiczne.py b/zajecia_17/gettery_settery_funkcje_magiczne.py
+new file mode 100644
+index 0000000..396bfbc
+--- /dev/null
++++ b/zajecia_17/gettery_settery_funkcje_magiczne.py
+@@ -0,0 +1,44 @@
++
++
++class Uczen:
++    def __init__(self, imie, nazwisko, wiek, oceny):
++        self.imie = imie
++        self.nazwisko = nazwisko
++        self.wiek = wiek
++        self.oceny = oceny
++
++
++    def custom_method(self):
++        print("To jest nasza customowa metoda")
++
++    def __int__(self):
++        return self.wiek
++
++    def __str__(self):
++        return self.imie
++
++    def __bool__(self):
++        return False if self.imie[-1].lower() != "a" else True
++
++    def __getitem__(self, item):
++        return self.oceny.get(item)
++
++    def __setitem__(self, key, value):
++        self.oceny[key] = value
++
++
++uczen_1 = Uczen(imie="Michal", nazwisko="Zietkowski", wiek=12, oceny={
++    "niemiecki": [1, 2, 3],
++    "angielski": [4, 2, 5]
++})
++uczen_1.custom_method()
++print(type(uczen_1))
++print(int(uczen_1))
++print(str(uczen_1))
++
++print(bool(uczen_1))
++
++print(uczen_1["niemiecki"])
++uczen_1["matematyka"] = [4, 5, 5, 2]
++print(uczen_1["matematyka"])
++
+diff --git a/zajecia_17/iterator_z_funkcja_next.py b/zajecia_17/iterator_z_funkcja_next.py
+new file mode 100644
+index 0000000..b601735
+--- /dev/null
++++ b/zajecia_17/iterator_z_funkcja_next.py
+@@ -0,0 +1,31 @@
++import random
++import string
++
++
++class PasswordIterator:
++    def __init__(self, limit):
++        self.limit = limit
++        self.position = 0
++        self.letters = string.ascii_letters
++        print(self.letters)
++
++    def get_random_letter(self):
++        return random.choice(self.letters)
++
++    def __iter__(self):
++        return self
++
++    def __next__(self):
++        print("wywolanie nexta")
++        if self.position < self.limit:
++            self.position += 1
++            return self.get_random_letter()
++        else:
++            raise StopIteration()
++
++password_iterator = PasswordIterator(limit=32)
++for letter in password_iterator:
++    print(letter)
++next(password_iterator)
++next(password_iterator)
++next(password_iterator)
+diff --git a/zajecia_17/iterators.py b/zajecia_17/iterators.py
+new file mode 100644
+index 0000000..626fe05
+--- /dev/null
++++ b/zajecia_17/iterators.py
+@@ -0,0 +1,89 @@
++from collections.abc import Iterable
++
++# numbers = [1, 2, 3, 4]
++#
++# for number in numbers:
++#     print(number)
++#
++#
++#
++# print(isinstance(numbers, Iterable))
++#
++# class Uczen:
++#     def __init__(self, imie, nazwisko, wiek, oceny):
++#         self.imie = imie
++#         self.nazwisko = nazwisko
++#         self.wiek = wiek
++#         self.oceny = oceny
++#
++#     def __iter__(self):
++#         return iter(self.oceny)
++#
++#
++# uczen_1 = Uczen(imie="Michal", nazwisko="Zietkowski", wiek=12, oceny=[1, 4, 5, 4, 3, 2, 4])
++#
++# for wartosc in uczen_1:
++#     print(wartosc)
++
++def show_users(users):
++    for user in users:
++        return user
++
++
++# def zaladuj_dane_z_pliku():
++#     with open("first_example.txt") as plik:
++#         temp_list = []
++#         for line in plik.read():
++#             temp_list.append(line)
++#         return temp_list
++
++
++users = ["user1", "user2", "user3", "user4", "user5", "user6"]
++# for user in show_users(users):
++#     print(user)
++#
++#
++# for line in zaladuj_dane_z_pliku():
++#     print(line)
++#
++# print(show_users(users))
++# print(show_users(users))
++# print(show_users(users))
++# print(show_users(users))
++# print(show_users(users))
++
++
++def show_users_generator(users):
++    for user in users:
++        yield user
++
++generator = show_users_generator(users)
++# print(type(generator))
++# print(generator)
++# wartosc = show_users(users)
++# print(wartosc)
++# print(type(wartosc))
++for user in generator:
++    print(user)
++print(next(generator))
++# print(next(generator))
++# print(next(generator))
++# print(next(generator))
++
++
++class Uczen:
++    def __init__(self, imie, nazwisko, wiek, oceny):
++        self.imie = imie
++        self.nazwisko = nazwisko
++        self.wiek = wiek
++        self.oceny = oceny
++
++    def __iter__(self):
++        return iter(self.oceny)
++
++
++uczen_1 = Uczen(imie="Michal", nazwisko="Zietkowski", wiek=12, oceny=[1, 4, 5, 4, 3, 2, 4])
++
++for wartosc in uczen_1:
++    print(wartosc)
++# print(next(uczen_1))
+\ No newline at end of file
+diff --git a/zajecia_17/przyklad_z_zuzyciem_danych.py b/zajecia_17/przyklad_z_zuzyciem_danych.py
+new file mode 100644
+index 0000000..b244679
+--- /dev/null
++++ b/zajecia_17/przyklad_z_zuzyciem_danych.py
+@@ -0,0 +1,35 @@
++import os
++
++import psutil
++
++def memory_usage():
++    process = psutil.Process(os.getpid())
++    mem_info = process.memory_info()
++    return mem_info.rss / (1024*1024)
++
++def read_file_to_list(file_path):
++    with open(file_path) as file:
++        data = file.readlines()
++    data = [line.strip() for line in data]
++    return data
++
++def read_file_generator(file_path):
++    with open(file_path) as file:
++        for line in file:
++            yield line.strip()
++
++
++print(f"Zużycie pamięci przed wczytaniem do listy: {memory_usage()} MB")
++data_list = read_file_to_list("test.txt")
++print(f"Zużycie pamięci po wczytaniu do listy: {memory_usage()} MB")
++
++del data_list
++
++print(f"Użycie pamięci przed generatorem: {memory_usage()} MB")
++generator = read_file_generator("test.txt")
++print(f"Użycie danych po stworzeniu generatora: {memory_usage()} MB")
++
++for line in generator:
++    pass
++
++print(f"Użycie danych po wygenerowaniu przez generator: {memory_usage()} MB")
+\ No newline at end of file
+diff --git a/zajecia_18/data.json b/zajecia_18/data.json
+new file mode 100644
+index 0000000..e4f7359
+--- /dev/null
++++ b/zajecia_18/data.json
+@@ -0,0 +1,6 @@
++{
++  "Szczecin": {
++    "2024-11-20": "Pada",
++    "2024-11-18": "Nie pada"
++  }
++}
+\ No newline at end of file
+diff --git a/zajecia_18/file_handler.py b/zajecia_18/file_handler.py
+new file mode 100644
+index 0000000..98d6b29
+--- /dev/null
++++ b/zajecia_18/file_handler.py
+@@ -0,0 +1,36 @@
++import json
++
++
++class FileHandler:
++    def __init__(self, file_path):
++        self.file_path = file_path
++        self.data = self.load_data_from_file()
++
++    def load_data_from_file(self):
++        with open(self.file_path) as file:
++            return json.loads(file.read())
++
++    def save_data_to_file(self):
++        with open(self.file_path) as file:
++            file.write(json.dumps(self.data))
++
++    def __setitem__(self, key, value):
++        city = key[0]
++        date = key[1]
++        if not self.data.get(city):
++            self.data[city] = {}
++        self.data[city][date] = value
++
++    def __getitem__(self, item):
++        city = item[0]
++        key = item[1]
++        return self.data.get(city, {}).get(key)
++
++    def __iter__(self):
++        return iter(self.data)
++
++    def items(self):
++        for city, info in self.data.items():
++            for date, info_date in info.items():
++                yield f"{city}: {date} - {info_date}"
++
+diff --git a/zajecia_18/lambdy.py b/zajecia_18/lambdy.py
+new file mode 100644
+index 0000000..05a0d3f
+--- /dev/null
++++ b/zajecia_18/lambdy.py
+@@ -0,0 +1,23 @@
++def funkcja_kwadratowa(numer):
++    return numer ** 2
++
++def dodaj(a, b):
++    return a + b
++
++print(funkcja_kwadratowa(5))
++print(funkcja_kwadratowa(10))
++print(funkcja_kwadratowa(15))
++
++funkcja_kwadratowa_lambda = lambda numer: numer **2
++# nazwa funkcji = lamba <argumenty funkcji>: <wartosc zwracana z funkcji>
++
++funkcja_dodaj_lambda = lambda a, b: a + b
++print(funkcja_kwadratowa_lambda(5))
++print(funkcja_kwadratowa_lambda(10))
++print(funkcja_kwadratowa_lambda(15))
++print(funkcja_dodaj_lambda(1, 2))
++print(funkcja_dodaj_lambda(5, 2))
++
++def przetworz_zbior_danych():
++    #operacje przetwarzajace
++    dane = []
+diff --git a/zajecia_18/runnable.py b/zajecia_18/runnable.py
+new file mode 100644
+index 0000000..1afea34
+--- /dev/null
++++ b/zajecia_18/runnable.py
+@@ -0,0 +1,17 @@
++from file_handler import FileHandler
++
++file_handler = FileHandler("data.json")
++
++file_handler["Krakow", "2024-11-27"] = "Nie pada"
++print(file_handler.data)
++
++print(file_handler["Wroclaw", "2024-11-27"])
++
++for info in file_handler:
++  print(info)
++
++
++generator = file_handler.items()
++
++for info in generator:
++  print(info)
+diff --git a/zajecia_19/abstrakcja.py b/zajecia_19/abstrakcja.py
+new file mode 100644
+index 0000000..e9c2e23
+--- /dev/null
++++ b/zajecia_19/abstrakcja.py
+@@ -0,0 +1,79 @@
++from abc import ABC, abstractmethod
++#
++#
++# class Zwierze(ABC):
++#
++#     @abstractmethod
++#     def odezwij_sie(self):
++#         pass
++#
++#     @abstractmethod
++#     def zyj(self):
++#         pass
++#
++#
++# class Lew(Zwierze):
++#     def odezwij_sie(self):
++#         print("rawrrr")
++#
++#
++# class Ryba(Zwierze):
++#     def odezwij_sie(self):
++#         print("gul gul gul")
++#
++#     def plywaj(self):
++#         print("plywam")
++#
++# class Pies(Zwierze):
++#     pass
++#
++#
++# lew = Lew()
++# lew.odezwij_sie()
++# ryba = Ryba()
++# ryba.odezwij_sie()
++# pies = Pies()
++
++
++class Produkt(ABC):
++
++    def przywitaj_sie(self):
++        print("czesc z produktu")
++
++    @abstractmethod
++    def podaj_mi_swoja_cene(self):
++        pass
++
++    @abstractmethod
++    def podaj_mi_swoja_date_waznosci(self):
++        pass
++
++
++class ProduktSwiateczny(Produkt):
++
++    def podaj_mi_swoja_cene(self):
++        pass
++
++    def podaj_mi_swoja_date_waznosci(self):
++        pass
++
++
++class ProduktPrzeceniony(Produkt):
++
++    def podaj_mi_swoja_cene(self):
++        pass
++
++    def podaj_mi_swoja_date_waznosci(self):
++        pass
++
++
++
++class NowyProdukt:
++    def przywitaj_sie(self):
++        print("czesc z produktu")
++
++    def podaj_mi_swoja_cene(self):
++        pass
++
++    def podaj_mi_swoja_date_waznosci(self):
++        pass
+diff --git a/zajecia_19/dziedziczenie.py b/zajecia_19/dziedziczenie.py
+new file mode 100644
+index 0000000..77e1b01
+--- /dev/null
++++ b/zajecia_19/dziedziczenie.py
+@@ -0,0 +1,63 @@
++class Pojazd:
++    def __init__(self, marka, model, kolor, silnik, rok_produkcji):
++        self.marka = marka
++        self.model = model
++        self.kolor = kolor
++        self.silnik = silnik
++        self.rok_produkcji = rok_produkcji
++
++    def uruchom_silnik(self):
++        print(f"uruchomilem silnik {self.silnik}")
++
++    def zmien_kolor(self, nowy_kolor):
++        self.kolor = nowy_kolor
++        print(f"zmienilem kolor na {nowy_kolor}")
++
++class PojazdUMechanika:
++    def polakieruj_drzwi(self):
++        print("polakierowalem drzwi")
++
++    def wymien_olej(self):
++        print("wymienilem olej w silniku")
++
++    def wymien_opone(self):
++        print("wymienilem opone")
++
++    def zaplac_za_naprawe(self):
++        print("zaplacilem za naprawe")
++
++    def zmien_kolor(self, nowy_kolor):
++        print(f"Mechanik zmienił mi kolor na {nowy_kolor}")
++
++class Samochod(Pojazd):
++    def wymien_filtr_do_klimatyzacji(self):
++        print("wymienilem filtr do klimatyzacji")
++
++    def uruchom_silnik(self):
++        print(f"Uruchomilem silnik w samochodzie!!!")
++        super().zmien_kolor("czarny")
++
++    def __init__(self, marka, model, kolor, silnik, rok_produkcji, ilosc_drzwi):
++        self.ilosc_drzwi = ilosc_drzwi
++        super().__init__(marka, model, kolor, silnik, rok_produkcji)
++
++
++class Motocykl(Pojazd):
++    def stan_deba(self):
++        print("jade na jednym kole!")
++
++
++class SamochodUMechanika(PojazdUMechanika, Samochod):
++    pass
++
++
++
++samochod = Samochod(marka="audi", model="a4", kolor="czarny", silnik="2.0 TDI", rok_produkcji=2020, ilosc_drzwi=5)
++samochod.uruchom_silnik()
++samochod.zmien_kolor("czerwony")
++print(samochod.kolor)
++
++
++alfa_romeo = SamochodUMechanika(marka="alfa romeo", model="giula", kolor="czerwony", silnik="1.9 JTD", rok_produkcji=1999, ilosc_drzwi=3)
++alfa_romeo.polakieruj_drzwi()
++alfa_romeo.zmien_kolor("czarny")
+\ No newline at end of file
+diff --git a/zajecia_19/funkcje_klasowe_i_statyczne.py b/zajecia_19/funkcje_klasowe_i_statyczne.py
+new file mode 100644
+index 0000000..7699565
+--- /dev/null
++++ b/zajecia_19/funkcje_klasowe_i_statyczne.py
+@@ -0,0 +1,67 @@
++class Pilkarz:
++
++    plec = "mezczyzna"
++
++    def __init__(self, ilosc_lat, imie, nazwisko):
++        self.ilosc_lat = ilosc_lat
++        self.imie = imie
++        self.nazwisko = nazwisko
++
++    def zmien_nazwisko(self, nowe_nazwisko):
++        self.nazwisko = nowe_nazwisko
++
++    @classmethod
++    def zmien_plec(cls, nowa_plec):
++        cls.plec = nowa_plec
++
++    @staticmethod
++    def zaloguj_mi_wydarzenie(wydarzenie):
++        print(f"zalogowalem wydarzenie {wydarzenie}")
++
++czlowiek_1 = Pilkarz(20, "Michal", "Adamiec")
++czlowiek_2 = Pilkarz(28, "Robert", "Lewandowski")
++
++# czlowiek_1.imie = "Andrzej"
++# print(czlowiek_1.imie)
++# print(czlowiek_2.imie)
++# print(czlowiek_2.plec)
++# print(czlowiek_2.plec)
++#
++#
++# Pilkarz.plec = "kobieta"
++# print(czlowiek_1.plec)
++# print(czlowiek_2.plec)
++# # czlowiek_1.zmien_nazwisko("Blaszczykowski")
++# # print(czlowiek_1.nazwisko)
++# # print(czlowiek_2.nazwisko)
++# czlowiek_1.zmien_plec("mezczyzna")
++# print(czlowiek_2.plec)
++# print(czlowiek_1.plec)
++
++# print(id(czlowiek_2.imie))
++# print(id(czlowiek_1.imie))
++# print(id(czlowiek_1.plec))
++# print(id(czlowiek_2.plec))
++#
++# czlowiek_2.plec = "kobieta"
++#
++# print(id(czlowiek_2.plec))
++# print(id(czlowiek_1.plec))
++#
++# czlowiek_3 = Pilkarz(40, "Adam", "Malysz")
++# print(czlowiek_3.plec)
++#
++# czlowiek_3.zmien_plec("obojniak")
++#
++# print(czlowiek_3.plec)
++# print(czlowiek_1.plec)
++# print(czlowiek_2.plec)
++
++
++print(id(czlowiek_2.zaloguj_mi_wydarzenie))
++print(id(czlowiek_1.zaloguj_mi_wydarzenie))
++
++nowa_nazwa_klasy = Pilkarz
++
++czlowiek_4 = nowa_nazwa_klasy(20, "Artur", "Boruc")
++print(czlowiek_4.plec)
+diff --git a/zajecia_19/hermetyzacja.py b/zajecia_19/hermetyzacja.py
+new file mode 100644
+index 0000000..f518e73
+--- /dev/null
++++ b/zajecia_19/hermetyzacja.py
+@@ -0,0 +1,19 @@
++class KontoBankowe:
++    def __init__(self, haslo, saldo):
++        self._haslo = haslo
++        self.__saldo = saldo
++
++    def wyplata(self, kwota_do_wyplaty):
++        print("weryfikacja kto chce zmienic saldo")
++        if self.__saldo >= kwota_do_wyplaty:
++            self.__saldo -= kwota_do_wyplaty
++        else:
++            print("nie mozemy zmienic salda")
++
++
++
++
++moje_konto = KontoBankowe("123", 1000)
++moje_konto.wyplata(900)
++moje_konto.__saldo = 200
++print(moje_konto.__saldo)
+diff --git a/zajecia_19/kompozycja.py b/zajecia_19/kompozycja.py
+new file mode 100644
+index 0000000..a74ba1e
+--- /dev/null
++++ b/zajecia_19/kompozycja.py
+@@ -0,0 +1,30 @@
++class Silnik:
++    def __init__(self, moc, pojemnosc):
++        self.moc = moc
++        self.pojemnosc = pojemnosc
++
++    def uruchom(self):
++        print(f"Uruchomilem silnik o mocy {self.moc} i pojemnosci {self.pojemnosc}")
++
++
++class Samochod:
++    def __init__(self, marka, model, kolor, silnik):
++        self.marka = marka
++        self.model = model
++        self.kolor = kolor
++        self.silnik = silnik
++
++    def uruchom_silnik(self):
++        if isinstance(self.silnik, Silnik):
++            self.silnik.uruchom()
++        else:
++            print("Niestety twoj silnik nie jest silnikiem")
++
++silnik_1_9_tdi = Silnik(moc=90, pojemnosc="1.9")
++
++auto = Samochod(marka="Audi", model="A4", kolor="czarny", silnik=silnik_1_9_tdi)
++auto_1 = Samochod(marka="Audi", model="A4", kolor="czarny", silnik="1.9 TDI")
++
++auto.uruchom_silnik()
++
++auto_1.uruchom_silnik()
+\ No newline at end of file
+diff --git a/zajecia_19/polimorfizm.py b/zajecia_19/polimorfizm.py
+new file mode 100644
+index 0000000..4e66356
+--- /dev/null
++++ b/zajecia_19/polimorfizm.py
+@@ -0,0 +1,26 @@
++from abc import abstractmethod, ABC
++
++
++class Zwierze(ABC):
++
++    @abstractmethod
++    def daj_glos(self):
++        pass
++
++
++class Kot(Zwierze):
++
++    def daj_glos(self):
++        print("miauu")
++
++class Pies(Zwierze):
++
++    def daj_glos(self):
++        print("hau hau")
++
++def wydaj_dzwiek(zwierze):
++    return zwierze.daj_glos()
++
++
++wydaj_dzwiek(Pies())
++wydaj_dzwiek(Kot())
+diff --git a/zajecia_19/wyjatki.py b/zajecia_19/wyjatki.py
+new file mode 100644
+index 0000000..a5ae562
+--- /dev/null
++++ b/zajecia_19/wyjatki.py
+@@ -0,0 +1,22 @@
++# try:
++#     print("Otwieram polaczenie z baza danych")
++#     wiek = int(input("Podaj mi swoj wiek: "))
++#     print(wiek)
++# except ValueError:
++#     print("Nie jestes wartoscia numeryczna")
++# finally:
++#     print("Zamykam polaczenie z baza danych")
++
++lista_gosci = ["Adam", "Ewa", "Marta"]
++
++
++try:
++    numer_goscia = int(input("Podaj numer goscia na liscie: "))
++    print(f"Twoj gosc to {lista_gosci[numer_goscia]}")
++    wiek_goscia = int(input("Podaj wiek goscia: "))
++# except ValueError:
++#     print("Niestety to nie jest wartosc numeryczna")
++# except IndexError:
++#     print("Niestety nie mamy takiego goscia na liscie")
++except (ValueError, IndexError):
++    print("Cos poszlo nie tak!")
+\ No newline at end of file
+diff --git a/zajecia_20/file_handler.py b/zajecia_20/file_handler.py
+new file mode 100644
+index 0000000..31f70af
+--- /dev/null
++++ b/zajecia_20/file_handler.py
+@@ -0,0 +1,38 @@
++from abc import abstractmethod
++
++import ABC
++
++class FileHandler(ABC):
++    def __init__(self, input_file, output_file, changes):
++        self.input_file = input_file
++        self.output_file = output_file
++        self.changes = changes
++        self.matrix = None
++
++    @abstractmethod
++    def load_data_from_file(self):
++        pass
++
++    @abstractmethod
++    def save_data_to_file(self):
++        pass
++
++    def transform(self):
++        #logika z poprzedniej metody trasform
++        pass
++
++
++class JsonFileHandler(FileHandler):
++    def load_data_from_file(self):
++        pass
++
++    def save_data_to_file(self):
++        pass
++
++
++class TxtFileHandler(FileHandler):
++    def load_data_from_file(self):
++        pass
++
++    def save_data_to_file(self):
++        pass
+diff --git a/zajecia_20/matrix_transform.py b/zajecia_20/matrix_transform.py
+new file mode 100644
+index 0000000..31a857a
+--- /dev/null
++++ b/zajecia_20/matrix_transform.py
+@@ -0,0 +1,13 @@
++
++import sys
++from file_handler import TxtFileHandler
++
++arguments = sys.argv
++if arguments[1].endswith(".txt"):
++    input_file_handler = TxtFileHandler(input_file=arguments[1], output_file=arguments[2], changes=arguments[3:])
++
++
++input_file_handler.transform()
++output_file_handler.matrix = input_file_handler.matrix
++output_file_handler.save_data_to_output_file()
++
+diff --git a/zajecia_9/funkcje.py b/zajecia_9/funkcje.py
+index 01e56c5..4db374a 100644
+--- a/zajecia_9/funkcje.py
++++ b/zajecia_9/funkcje.py
+@@ -60,8 +60,7 @@ lista_uczniow = [
+ #         print("Nie znaleźliśmy ucznia!")
+ 
+ 
+-def znajdz_ucznia_w_liscie(imie_ucznia, nazwisko_ucznia, klasa_ucznia="0"):
+-    print(klasa_ucznia)
++def znajdz_ucznia_w_liscie(imie_ucznia, nazwisko_ucznia, klasa_ucznia):
+     for uczen in lista_uczniow:
+         if (
+             uczen.get("imie") == imie_ucznia
+-- 
+2.25.1
+
