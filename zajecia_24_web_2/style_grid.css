@@ -1,0 +1,8 @@
+#table{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10vh;
+    justify-content: stretch;
+    align-items: center;
+}

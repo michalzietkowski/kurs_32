@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello user</title>
+</head>
+<body>
+    <h1>Hello user</h1>
+    {% if imie.endswith("a") %}
+        <h2>Jestes kobieta</h2>
+    {% else %}
+        <h2>Jestes mezczyzna</h2>
+    {% endif %}
+    <p>Witaj, {{ imie }}</p>
+
+</body>
+</html>

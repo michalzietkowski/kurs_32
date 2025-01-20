@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>Email</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.name }}</td>
+      <td>{{ user.surname }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <form method="post">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email_name"><br>
+    <button type="submit">Submit</button>
+  </form>
+
+
+
+</body>
+</html>

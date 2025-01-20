@@ -1,0 +1,30 @@
+.header-class {
+    background-color: #1dac95;
+    padding: 15px;
+}
+
+.footer {
+    background-color: yellow;
+    padding: 15px;
+}
+
+.sidebar{
+    background-color: red;
+    padding: 20px;
+}
+
+.section-class{
+    background: gray;
+    padding: 20px;
+}
+
+@media(max-width: 768px) {
+    .main-content {
+        display: flex;
+    }
+}
+
+.main_content {
+    display: flex;
+    flex-direction: column;
+}

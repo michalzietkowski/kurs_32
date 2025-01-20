@@ -1,0 +1,31 @@
+#navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30vw;
+    height: 20vh;
+    align-items: flex-start;
+}
+
+#nav_links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    order: 1;
+    flex-grow: 1;
+
+}
+
+#logo{
+    order: 0;
+}
+
+#content{
+    margin: 10vh 20vw;
+}
+
+body{
+    display: grid;
+    margin: 0;
+    padding: 0;
+}
